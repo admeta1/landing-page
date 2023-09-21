@@ -7,7 +7,7 @@ export const getCsv = async (req, res) => {
   try {
     const origin = req.get("Origin");
 
-    console.log("origin: " , origin);
+    console.log("origin: ", origin);
 
     // Create a new Request document and save the origin information
     const newRequest = new Request({ origin });
@@ -53,9 +53,10 @@ export const getCsv = async (req, res) => {
 // ---------------------register----------------
 export const register = async (req, res) => {
   const { name, mobileNo, email } = req.body;
+  console.log(req);
   const origin = req.get("Origin");
 
-  console.log("origin: " , origin);
+  console.log("origin: ", origin);
   // Validate the mobileNo length
   if (mobileNo.length !== 10 || !/^\d{10}$/.test(mobileNo)) {
     return res.status(400).json({
