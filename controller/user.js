@@ -5,6 +5,14 @@ import { Parser } from "json2csv";
 
 export const getCsv = async (req, res) => {
   try {
+    const origin = req.get("Origin");
+
+    console.log("origin: " , origin);
+
+    // Create a new Request document and save the origin information
+    const newRequest = new Request({ origin });
+    await newRequest.save();
+
     let users = [];
     const userData = await User.find({});
 
@@ -45,6 +53,9 @@ export const getCsv = async (req, res) => {
 // ---------------------register----------------
 export const register = async (req, res) => {
   const { name, mobileNo, email } = req.body;
+  const origin = req.get("Origin");
+
+  console.log("origin: " , origin);
   // Validate the mobileNo length
   if (mobileNo.length !== 10 || !/^\d{10}$/.test(mobileNo)) {
     return res.status(400).json({
@@ -65,7 +76,7 @@ export const register = async (req, res) => {
     }
 
     // Create a new user
-    const newUser = new User({ name, mobileNo, email });
+    const newUser = new User({ name, mobileNo, email, domain: origin });
     const saveData = await newUser.save();
 
     res.status(200).json({ status: true, message: "Registered successfully" });

@@ -1,11 +1,18 @@
-import  mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-export const connectDB = ()=>{
-    mongoose
-   
-    .connect(process.env.MONGO_URI, {
-      dbName: "Market",
+const mongodbUri =
+  "mongodb+srv://aditya:Meta%40123@cluster0.txlbx2y.mongodb.net/UserDb?retryWrites=true&w=majority";
+
+export const connectDB = function () {
+  mongoose
+    .connect(mongodbUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: false,
     })
-    .then(() => console.log("Database connected"))
-    .catch((e) => console.log(e));
-}
+    .then((res) => {
+      console.log("database connected");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};

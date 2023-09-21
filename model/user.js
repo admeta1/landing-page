@@ -12,6 +12,12 @@ const schema = new mongoose.Schema({
     unique: true,
   },
 
+  domain :{
+    type: String,
+    index: true,
+  },
+  // origin: String,
+
   CreatedAt: {
     type: Date,
     default: Date.now,

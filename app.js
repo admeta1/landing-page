@@ -18,11 +18,18 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "*",
-    methods: ["GET", "POST", "DELETE", "PUT"],
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
     credentials: true,
   })
 );
 
+app.use((req, res, next) => {
+  const origin = req.get("Origin");
+  if (origin) {
+    console.log(`Access from origin: ${origin}`);
+  }
+  next();
+});
 //using routes
 app.use("/api/v1/users", userRoutes);
 
