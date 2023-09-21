@@ -9,17 +9,13 @@ export const getCsv = async (req, res) => {
 
     console.log("origin: ", origin);
 
-    // Create a new Request document and save the origin information
-    const newRequest = new Request({ origin });
-    await newRequest.save();
-
     let users = [];
     const userData = await User.find({});
 
     let serialNo = 1; // Initialize serial number
 
     userData.forEach((user) => {
-      const { name, mobileNo, email, CreatedAt } = user;
+      const { name, mobileNo, email, CreatedAt, domain } = user;
 
       users.push({
         "Serial No": serialNo++, // Increment serial number
@@ -27,6 +23,7 @@ export const getCsv = async (req, res) => {
         mobileNo: mobileNo,
         email: email,
         "Registration Date": CreatedAt, // Add registration date
+        domain: domain,
       });
     });
 
@@ -36,6 +33,7 @@ export const getCsv = async (req, res) => {
       "mobileNo",
       "email",
       "Registration Date",
+      "domain",
     ]; // Include "Registration Date" in the fields
 
     const json2csvParser = new Parser({ fields: csvFields });
@@ -53,7 +51,7 @@ export const getCsv = async (req, res) => {
 // ---------------------register----------------
 export const register = async (req, res) => {
   const { name, mobileNo, email } = req.body;
-  console.log(req);
+  // console.log(req);
   const origin = req.get("Origin");
 
   console.log("origin: ", origin);

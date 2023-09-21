@@ -26,7 +26,7 @@ app.use(
 app.use((req, res, next) => {
   const origin = req.get("Origin");
   if (origin) {
-    console.log(`Access from origin: ${origin}`);
+    // console.log(`Access from origin: ${origin}`);
   }
   next();
 });
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 app.use("/api/v1/users", userRoutes);
 
 app.get("/", (req, res) => {
-  console.log(req.get("host"));
+  // console.log(req.get("host"));
   res.send("Nice working");
 });
 app.use((err, req, res, next) => {});
