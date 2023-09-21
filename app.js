@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 export const app = express();
+app.use(cors({origin:'*'}))
 
 config({
   path: "./database/config.env",
@@ -13,7 +14,7 @@ config({
 //using middlewares
 
 
-app.use(cors({origin:'*'}))
+
 app.use(express.json());
 app.use(cookieParser());
 
