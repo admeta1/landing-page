@@ -12,16 +12,12 @@ config({
 });
 //using middlewares
 
+
+
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({origin:'*'}))
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "DELETE", "PUT", "PATCH", "OPTIONS"],
-    credentials: true,
-  })
-);
 
 app.use((req, res, next) => {
   const origin = req.get("Origin");
