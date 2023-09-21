@@ -12,8 +12,6 @@ const Port = 4099;
 app.use("/", router);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// Add the error log middleware to the app
 app.use(cors({ origin: "*" }));
 
 // routes using here
